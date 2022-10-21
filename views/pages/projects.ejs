@@ -1,0 +1,35 @@
+<div id="projects" v-cloak>
+
+  <button type="button" class="btn m-2" :class="selectedCategory == category.id ? 'btn-danger' : 'btn-primary' " @click="filterCategory(category.id)" v-for="category in category_list">{{category.name}}</button>
+
+  <span v-for="(item,index) in uniqueTags" class="m-2">
+    <input type="checkbox" :id="'item-'+index" :value="item" v-model="selectedTags" >
+    <label :for="'item-'+index">{{item}}</label>
+  </span>
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Tags</th>
+        <th scope="col">Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(project,index) in data">
+        <th scope="row">{{index +1 }}</th>
+        <td>{{project.name}}</td>
+        <td>{{project.tags}}</td>
+        <td>{{project.category}}</td>
+      </tr>
+     
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-outline-primary" @click="loadMore()">Load More</button>
+
+
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>
